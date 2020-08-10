@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.example.microservices.kafka</groupId>
-	<artifactId>demo-producer</artifactId>
+	<artifactId>demo-processor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo-producer</name>
+	<name>demo-processor</name>
 	<description>Demo project for Spring Cloud Stream</description>
 
 	<properties>
