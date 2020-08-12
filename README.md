@@ -9,13 +9,7 @@ Spring Cloud Stream provide defaults for pretty much everything, such as connect
 
 ![](https://github.com/antoniopaolacci/Spring-Cloud-Stream-and-microservice-communication/blob/master/kafka-1.jpg)
 
-The following _Bean_ is a supplier, needs to read some data from inbound topic and outputs other data to outbound topic. 
-
-Spring cloud stream makes very easy serialize and deserialize automatically your data.
-
-JSON is the default content-type but if you want, you can change this format with: XML, proto-buffer, etc... 
-
-You don't need to define transformation JSON to a string, it's free!
+The following _Bean_ is a supplier, needs to read some data from inbound topic and outputs other data to outbound topic. Spring cloud stream makes very easy serialize and deserialize automatically your data.JSON is the default content-type but if you want, you can change this format with: xml, proto-buffer, etc.. You don't need to define transformation JSON to a string, it's free!
 
 ```java
 @Bean
