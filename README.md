@@ -7,7 +7,7 @@ Spring Cloud Stream allows us to do this by minimizing boilerplate and maximizin
 
 Spring Cloud Stream provide defaults for pretty much everything, such as connecting to the broker, declaring inbound/outbound topics, and serializing/deserializing data.
 
-![https://github.com/antoniopaolacci/Spring-Cloud-Stream-and-microservice-communication/blob/master/kafka-1.jpg]()
+![](https://github.com/antoniopaolacci/Spring-Cloud-Stream-and-microservice-communication/blob/master/kafka-1.jpg)
 
 The following _Bean_ is a supplier, needs to read some data from inbound topic and outputs other data to outbound topic. 
 
@@ -46,4 +46,4 @@ public Consumer<String> consumerBean() {
 	return System.out::println;
 }
 ```
-![https://github.com/antoniopaolacci/Spring-Cloud-Stream-and-microservice-communication/blob/master/kafka-2.jpg]()
+![](https://github.com/antoniopaolacci/Spring-Cloud-Stream-and-microservice-communication/blob/master/kafka-2.jpg)
