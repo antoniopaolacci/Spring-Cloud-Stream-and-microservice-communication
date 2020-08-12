@@ -41,3 +41,27 @@ public Consumer<String> consumerBean() {
 }
 ```
 ![](https://github.com/antoniopaolacci/Spring-Cloud-Stream-and-microservice-communication/blob/master/kafka-2.jpg)
+
+
+
+If you want to make your application **reactive** use Flux<Movie>
+
+**Reactive applications** are message-driven applications that decide the next step based on arrival of message. Requests of data that may or may not be available and recipients await the arrival of messages when data is ready. Common scenario: _John orders pizza, phones Bob, invites him to come, heads home, and gets his pizza delivered. But this time, he waits until Bob comes and only  after that he turns the movie on. This is what the **reactive approach** is about. You wait till all async actions (changes) are completed and then proceed with further actions._
+
+**RxJava** was the first Reactive Extension API specific for the Java platform. It works with Java 6 and provides an opportunity to write asynchronous, event-based programs for both Java and Android  Java, which is very convenient.
+
+**Spring Reactor** is another framework for Java from  Spring developers. It is quite similar to RxJava but has simpler  abstraction. The framework has managed to win popularity due to the  possibility to leverage benefits of Java 8.
+
+The following _Bean_ is a reactive supplier:
+
+```java
+@Bean
+public Function<Flux<Movie>, Flux<Movie>> processorBean() {
+	return Flux -> Flux.map(this::batmanAdjustFactor).filter(this::filterByRating);
+}
+```
+Few advantages:
+
+- less code to do reactively 
+- your application benefits of best handling IO operation (db communication, http calls, multitasking)
+- if you have everythings reactive you are 99% *buzzword compliant*

@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import reactor.core.publisher.Flux;
+
 @SpringBootApplication
 public class DemoProcessorApplication {
 
@@ -16,20 +18,8 @@ public class DemoProcessorApplication {
 	
 
 	@Bean
-	public Function<Movie, Movie> processorBean() {
-		
-		return theMovie -> {
-			
-			Movie correctedMovie = batmanAdjustFactor(theMovie);
-			
-				if(filterByRating(correctedMovie)){
-					return correctedMovie;
-				} else {
-					// Null would means that you can output any messages
-					return null;
-				}
-		};	
-	
+	public Function<Flux<Movie>, Flux<Movie>> processorBean() {
+		return Flux -> Flux.map(this::batmanAdjustFactor).filter(this::filterByRating);
 	}
 	
 	private boolean filterByRating(Movie m){
