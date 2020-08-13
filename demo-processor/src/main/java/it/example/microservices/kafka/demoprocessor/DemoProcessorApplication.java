@@ -3,17 +3,34 @@ package it.example.microservices.kafka.demoprocessor;
 
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import reactor.core.publisher.Flux;
 
+@Controller
 @SpringBootApplication
 public class DemoProcessorApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoProcessorApplication.class, args);
+	}
+	
+	@Autowired
+	private StreamBridge streamBridge;
+	
+	@PostMapping("/movies")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	public void send(@RequestBody Movie movie) { 
+		streamBridge.send("goodmovies", movie);
 	}
 	
 

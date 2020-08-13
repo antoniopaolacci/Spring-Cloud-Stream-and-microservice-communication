@@ -7,9 +7,15 @@ Spring Cloud Stream allows us to do this by minimizing boilerplate and maximizin
 
 Spring Cloud Stream provide defaults for pretty much everything, such as connecting to the broker, declaring inbound/outbound topics, and serializing/deserializing data.
 
+In this example (ref: David's file https://github.com/takeaway/spring-cloud-stream-examples)
+
+- producer is a demo service that puts movies with a name and rating on Kafka topic "movies"
+- processor is a demo service that reads from "movies", filters out movies below a certain rating and puts on "goodmovies" 
+- consumer is a demo service that reads from Kafka topic "goodmovies" and prints message contents to standard output
+
 ![](https://github.com/antoniopaolacci/Spring-Cloud-Stream-and-microservice-communication/blob/master/kafka-1.jpg)
 
-The following _Bean_ is a supplier, needs to read some data from inbound topic and outputs other data to outbound topic. Spring cloud stream makes very easy serialize and deserialize automatically your data.JSON is the default content-type but if you want, you can change this format with: xml, proto-buffer, etc.. You don't need to define transformation JSON to a string, it's free!
+The following _Bean_ is a supplier, needs to read some data from inbound topic and outputs other data to outbound topic. Spring cloud stream makes very easy serialize and deserialize automatically your data. JSON is the default content-type of spring cloud stream but if you want, you can change this format with xml, proto-buffer, etc.. 
 
 ```java
 @Bean
@@ -30,9 +36,7 @@ public Function<Movie, Movie> processorBean() {
 }
 ```
 
-
-
-The following Bean is the consumer, it is unaware of the content type, the content will be transformed in a String and print to the screen.
+You don't need to define transformation JSON to a string, it's free! The following Bean is the consumer, it is unaware of the content-type, the content will be transformed in a String and printed to the screen.
 
 ```java
 @Bean
@@ -44,7 +48,7 @@ public Consumer<String> consumerBean() {
 
 
 
-If you want to make your application **reactive** use Flux<Movie>
+If you want to make your application **reactive** use Flux\<Movie\>
 
 **Reactive applications** are message-driven applications that decide the next step based on arrival of message. Requests of data that may or may not be available and recipients await the arrival of messages when data is ready. Common scenario: _John orders pizza, phones Bob, invites him to come, heads home, and gets his pizza delivered. But this time, he waits until Bob comes and only  after that he turns the movie on. This is what the **reactive approach** is about. You wait till all async actions (changes) are completed and then proceed with further actions._
 
@@ -60,8 +64,8 @@ public Function<Flux<Movie>, Flux<Movie>> processorBean() {
 	return Flux -> Flux.map(this::batmanAdjustFactor).filter(this::filterByRating);
 }
 ```
-Few advantages:
+Few advantages of java reactive approach:
 
 - less code to do reactively 
-- your application benefits of best handling IO operation (db communication, http calls, multitasking)
+- your application benefits of best handling IO operation (db communication, http calls, multitasking, etc..)
 - if you have everythings reactive you are 99% *buzzword compliant*
