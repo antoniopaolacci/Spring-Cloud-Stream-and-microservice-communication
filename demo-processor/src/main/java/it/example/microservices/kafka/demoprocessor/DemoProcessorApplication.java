@@ -33,7 +33,6 @@ public class DemoProcessorApplication {
 		streamBridge.send("goodmovies", movie);
 	}
 	
-
 	@Bean
 	public Function<Flux<Movie>, Flux<Movie>> processorBean() {
 		return Flux -> Flux.map(this::batmanAdjustFactor).filter(this::filterByRating);

@@ -12,6 +12,7 @@ public class Movie {
 
 	private String name;
 	private int rating;
+	private String description;
 
 	@Override
 	public boolean equals(Object obj) {
