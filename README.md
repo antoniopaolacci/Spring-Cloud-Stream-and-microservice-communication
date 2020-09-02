@@ -7,7 +7,7 @@ Spring Cloud Stream allows us to do this by minimizing boilerplate and maximizin
 
 Spring Cloud Stream provide defaults for pretty much everything, such as connecting to the broker, declaring inbound/outbound topics, and serializing/deserializing data.
 
-In this example (reference David's example https://github.com/takeaway/spring-cloud-stream-examples)
+In this example (reference David's example https://github.com/takeaway/spring-cloud-stream-examples) we have three different java maven module:
 
 - producer is a demo service that puts movies with a name and rating on Kafka topic *"movies"*
 - processor is a demo service that reads from *"movies"*, filters out movies below a certain rating and puts on *"goodmovies"* 
@@ -43,7 +43,7 @@ spring.cloud.stream.bindings.processorBean-in-0.destination=movies
 spring.cloud.stream.bindings.processorBean-out-0.destination=goodmovies
 ```
 
-You don't need to define transformation json to string, it's free! The following Bean is the consumer, it is unaware of the content-type, the content will be transformed in a String and printed to the screen.
+You don't need to define transformation JSON to string, it's free! The following Bean is the consumer, it is unaware of the content-type, the content will be transformed in a String and printed to the screen.
 
 ```java
 @Bean
@@ -53,9 +53,9 @@ public Consumer<String> consumerBean() {
 ```
 ![](https://github.com/antoniopaolacci/Spring-Cloud-Stream-and-microservice-communication/blob/master/kafka-2.jpg)
 
-If you want to make your application **reactive** use Flux\<Movie\>.
-
 ##### Reactive Application  
+
+If you want to make your application **reactive** use Flux\<Movie\>.
 
 **Reactive applications** are message-driven applications that decide the next step based on arrival of message. Requests of data that may or may not be available and recipients await the arrival of messages when data is ready. Common scenario: _John orders pizza, phones Bob, invites him to come, heads home, and gets his pizza delivered. But this time, he waits until Bob comes and only after that he turns the movie on. This is what the **reactive approach** is about. You wait till all async actions (changes) are completed and then proceed with further actions._
 
